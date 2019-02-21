@@ -32,5 +32,6 @@ This repository is for training of programming.
 * vim 1.py 
 * git add 1.py
 * git commit -m "1.py"
+* git pull origin dev
 * git push origin dev
 
