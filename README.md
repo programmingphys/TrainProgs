@@ -9,3 +9,5 @@ This repository is for training of programming.
 * test : for practice. 练习用，可以自己上传、修改、下载等。
 
 编程练习将会陆续增加。大约10个左右
+
+seven
