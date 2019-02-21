@@ -29,6 +29,7 @@ This repository is for training of programming.
 * git init 
 * git remote add origin git@github.com:programmingphys/TrainProgs.git
 * git pull origin dev
+123
 * vim 1.py 
 * git add 1.py
 * git commit -m "1.py"
