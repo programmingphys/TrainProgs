@@ -13,7 +13,7 @@ This repository is for training of programming.
 
 
 
-##加入github全局设置
+## 加入github全局设置
 * git config --global user.name "Your Name"
 * git config --global user.email "email@example.com"
 * ssh-keygen -t rsa -C "youremail@example.com"
@@ -23,7 +23,7 @@ This repository is for training of programming.
 * 登陆GitHub，打开“Account settings”，“SSH Keys”页面
 * 点“Add SSH Key”，填上任意Title，在Key文本框里粘贴id_rsa.pub文件的内容
 
-##实际操作
+## 实际操作
 * mkdir filename
 * cd filename
 * git init 
@@ -32,5 +32,6 @@ This repository is for training of programming.
 * vim 1.py 
 * git add 1.py
 * git commit -m "1.py"
+* git pull origin dev
 * git push origin dev
 
