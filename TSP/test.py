@@ -3,7 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import sys
 
-#全局变量，city为城市坐标
+#全局变量，city为城市坐标,distmat为距离矩阵
 city = None
 distmat = None
 
@@ -11,10 +11,41 @@ distmat = None
 
 #直接法求最小值
 def find_minumum(map_filename):
-		global city	
-		city = load_map(map_filename)	
-		print('min')
+		#load map
+		load_map(map_filename)
+		#get all sequence
+		l = list(range(len(city)))
+		pos, end = 0, len(city)+1
+		allseq = all_seq(l,pos,end)
+		#get all length
+		alllen = []
+		for i in range(len(allseq)):
+				alllen.append(road_len(allseq[i]))
+		#get minimum sequence & length
+		minlen = min(alllen)
+		minseq = allseq[allseq.index(min(alllen))]
+		
+		return minlen, minseq
 
+#生成所有路径
+def all_seq(l,pos,end):
+		r = []
+		if pos == end:
+				r.append(l)
+		else:
+				for i in range(pos,end):
+						l[i],l[pos] = l[pos],l[i]
+						all_seq(l,pos,end)
+						l[i],l[pos] = l[pos],l[i]
+
+#产生给定路径的长度
+def road_len(l):
+		length = 0
+		for i in range(len(l)-1):
+				length = length+distmat[i][i+1]
+		length = length+distmat[0][len(l)-1] 
+
+						
 
 
 
@@ -34,8 +65,8 @@ def gen_map(map_filename,n):
 
 #载入地图坐标信息
 def load_map(map_filename):
-		#return pd.read_csv(map_filename)
-		return pd.read_csv(map_filename)[['x','y']]
+		global city
+		city = pd.read_csv(map_filename)[['x','y']]
 
 #获取给定标号城市坐标
 def get_pos(n):
