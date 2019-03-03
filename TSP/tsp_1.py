@@ -32,17 +32,16 @@ def give_pass(df):
     path0_length = calculate_distance(df_path0)
     #import pdb
    # pdb.set_trace()
-    for i in range(1000):
+    for i in range(2000):
         df_r = random_swap(df_path0)
         path1_length = calculate_distance(df_r)
         if path1_length < path0_length:
             df = df_r
         else:
             df = df
-    return df 
 
-city_xy = get_city(5)
-give_pass(city_xy)
+    df.loc[len(df)] = [df.iloc[0,0],df.iloc[0,1]]
+    return df
 
         
  #   l = permutations(df.values)
@@ -67,3 +66,8 @@ def random_swap(df):
     return df 
 
     
+city_xy = get_city(5)
+df = give_pass(city_xy)
+print(df)
+plt.plot(df.x,df.y)
+plt.show()
