@@ -11,6 +11,7 @@ def generate_table(group=['r','f','rf']): #导入已知群
         list=[] #用来保存每一个单位元与所有单位圆的组合
         for j in group:
             x=j+i
+            x=simplify(x)
             list=list+[x]
         all.append(list)
     df=pd.DataFrame({group[0]:all[0]}) #将所有组合排成表
@@ -22,8 +23,9 @@ def generate_table(group=['r','f','rf']): #导入已知群
 def simplify(s): #示意化简函数，效果为在组合尾部加一个a，拼接时删除
     return s+'a'
 table=generate_table()
-print('生成的表格:',/n,table)
+print(table)
+'''
 for i in range(len(table)):
     for j in range(len(table)):
         table.iloc[i,j]=simplify(table.iloc[i,j])
-print('化简后的表格:',/n,table)
+'''
