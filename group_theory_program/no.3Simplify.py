@@ -7,6 +7,10 @@ def get_str():
     s = 'fffrrrrrfrffrrf'
     return s
 
+def get_unit_group():
+    unit_group = ['rrr','ff','frfr']
+    return unit_group
+
 def remove_unit(s,unit_group):
     #从字符串中去掉单位元
     #input:任意字符串，单位元 output：去除单位元的字符串
@@ -19,7 +23,7 @@ def remove_unit(s,unit_group):
             s = s1        
     return s1
 
-def get_formula(unit,group1,group2,formula1,formula2):
+def get_formula(unit_group,unit,group1,group2,formula1,formula2):
     #得到由单位元计算出的替换公式
     #input：当前单位元，字符串及其对应替换元，初始替换公式  output：用于替换的公式
     for m in range(len(group1)):
@@ -35,7 +39,7 @@ def get_formula(unit,group1,group2,formula1,formula2):
                     formula1.append(m_new)
                     formula2.append(n_new)
                 if len(m_new) > 1:
-                    formula1,formula2 = get_formula(unit,[m_new],[n_new],formula1,formula2)
+                    formula1,formula2 = get_formula(unit_group,unit,[m_new],[n_new],formula1,formula2)
                     #print('#2#',formula1,formula2)
             if group1[m][-1] == unit[n][0]:
                 m_new = remove_unit(group1[m]+unit[n][1:],unit)
@@ -44,12 +48,19 @@ def get_formula(unit,group1,group2,formula1,formula2):
                     formula1.append(m_new)
                     formula2.append(n_new) 
                 if len(m_new) > 1:
-                    formula1,formula2 = get_formula(unit,[m_new],[n_new],formula1,formula2)            
+                    formula1,formula2 = get_formula(unit_group,unit,[m_new],[n_new],formula1,formula2)            
     return formula1,formula2
 
-def simplification(s1,unit_group,formula1,formula2):
+def simplification():
     #化简字符串
     #input：原字符串，单位元列表，用于替换的公式  output：化简完全的字符串
+    formula1 = []
+    formula2 = []
+    unit_group = get_unit_group()
+    group_key = ['','','']
+    unit = unit_group.copy()
+    a,b = get_formula(unit_group,unit,unit_group,group_key,formula1,formula2)
+    s1 = get_str()
     s2 = ''
     s1 = remove_unit(s1,unit_group)
     while s2 != s1:
@@ -59,17 +70,8 @@ def simplification(s1,unit_group,formula1,formula2):
                 s1 = s1.replace(formula2[i],formula1[i])
                 s1 = remove_unit(s1,unit_group)
                 #print(a[i],b[i],s1)
-                
+    print(s1)         
     return s1
 
 if __name__ == "__main__":
-    formula1 = []
-    formula2 = []
-    unit_group = ['rrr','ff','frfr']
-    group_key = ['','','']
-    unit = unit_group.copy()
-    a,b = get_formula(unit,unit_group,group_key,formula1,formula2)
-    s = get_str()
-    s1 = simplification(s,unit_group,a,b)
-    print('原始字符串：',s,'化简得到的字符串：',s1)
-
+    s1 = simplification()
