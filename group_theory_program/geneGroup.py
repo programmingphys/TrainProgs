@@ -49,9 +49,13 @@ def geneGroup(generator,unitSet,initSet):
         #将initSet和newSet转换为集合格式，进行对比
         stop = (newSet == initSet)
         #print(len(sets)+1000)
+    for i in range(len(sets[-1])):
+        if sets[-1][i] == '':
+            sets[-1][i] = 'e'
+
     return sets[-1]
 
 if __name__ == "__main__":
     #new = geneNewElement(['r','f'],['rrr','ff'],['r','','f'])
-    new = geneGroup(['r','f'],['rrr','ff','frfrfr','rfrfrf'],['r','f'])
+    new = geneGroup(['r','f'],['rrr','ff','frfr'],['r','f'])
     print('new set is ',new)
